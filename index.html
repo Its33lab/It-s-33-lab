@@ -1,0 +1,473 @@
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>轉職評量表</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap">
+
+<style>
+/* ── 沿用頻道既有色票(CLAUDE.md 的設計系統),不另創一套 ───────── */
+:root{
+  --bg:#f7f1e6; --bg2:#efe6d5; --card:#fffaf1;
+  --ink:#4a4137; --muted:#8d8069; --line:#3a322a; --hair:#e0d4bd;
+  --khaki:#a98f5f; --rose:#c88e73; --sage:#7d9877; --gold:#e8b558;
+  --on-accent:#fffaf1;
+  --shadow:6px 6px 0 var(--line);
+  --serif:"Noto Serif TC",Georgia,"PingFang TC","Microsoft JhengHei",serif;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#221d18; --bg2:#1b1712; --card:#2e2721;
+    --ink:#f2ead9; --muted:#a2957f; --line:#7a6a55; --hair:#463c31;
+    --khaki:#c8ab77; --rose:#dda98d; --sage:#9dba95; --gold:#e8b558;
+    --on-accent:#221d18;
+    --shadow:6px 6px 0 var(--line);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#221d18; --bg2:#1b1712; --card:#2e2721;
+  --ink:#f2ead9; --muted:#a2957f; --line:#7a6a55; --hair:#463c31;
+  --khaki:#c8ab77; --rose:#dda98d; --sage:#9dba95; --gold:#e8b558;
+  --on-accent:#221d18;
+  --shadow:6px 6px 0 var(--line);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  line-height:1.7;-webkit-text-size-adjust:100%;
+  background-image:
+    linear-gradient(rgba(169,143,95,.10) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(169,143,95,.10) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px 72px}
+
+/* ── 頁首 ─────────────────────────────── */
+header{padding:44px 0 30px}
+.ep{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.18em;
+  color:var(--khaki);border:2px solid var(--khaki);border-radius:999px;padding:4px 14px}
+h1{font-family:var(--serif);font-weight:900;font-size:clamp(30px,7vw,44px);
+  line-height:1.25;margin:16px 0 10px;text-wrap:balance}
+.sub{color:var(--muted);font-size:16px;margin:0;max-width:34em}
+
+/* ── 步驟區塊 ──────────────────────────── */
+section{margin-top:40px}
+.stephead{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.stepno{flex:none;width:34px;height:34px;border-radius:50%;background:var(--khaki);
+  color:var(--on-accent);font-weight:900;font-size:17px;
+  display:flex;align-items:center;justify-content:center}
+h2{font-family:var(--serif);font-weight:700;font-size:22px;margin:0;letter-spacing:.01em}
+.hint{color:var(--muted);font-size:15px;margin:0 0 18px 46px}
+
+/* ── 面向卡 ───────────────────────────── */
+.dim{background:var(--card);border:2.5px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);padding:18px 18px 16px;margin-bottom:18px}
+.dimtop{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.dimname{font-family:var(--serif);font-weight:700;font-size:21px}
+.dimask{color:var(--muted);font-size:14px;flex:1 1 100%;margin-top:2px}
+
+details{margin-top:12px;border-top:1.5px dashed var(--hair);padding-top:10px}
+summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--khaki);
+  list-style:none;display:flex;align-items:center;gap:6px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"▾";transition:transform .2s}
+details[open] summary::after{transform:rotate(180deg)}
+summary:focus-visible{outline:2.5px solid var(--rose);outline-offset:3px;border-radius:4px}
+.qlist{margin:10px 0 0;padding-left:19px;font-size:14.5px;color:var(--ink)}
+.qlist li{margin:5px 0}
+.qlist .note{color:var(--muted);font-size:13px}
+
+.scores{display:grid;grid-template-columns:auto 1fr;gap:8px 12px;align-items:center;margin-top:14px}
+.slab{font-size:14px;font-weight:700;color:var(--muted);white-space:nowrap}
+.dots{display:flex;gap:6px}
+.dot{flex:1;max-width:46px;aspect-ratio:1;min-height:38px;border-radius:9px;
+  border:2px solid var(--hair);background:transparent;color:var(--muted);
+  font:inherit;font-weight:700;font-size:15px;cursor:pointer;
+  font-variant-numeric:tabular-nums;transition:background .12s,color .12s,border-color .12s}
+.dot:focus-visible{outline:2.5px solid var(--rose);outline-offset:2px}
+.dot.on{background:var(--khaki);border-color:var(--khaki);color:var(--on-accent)}
+.dots.nw .dot.on{background:var(--sage);border-color:var(--sage);color:var(--on-accent)}
+
+.gap{display:flex;align-items:center;gap:9px;margin-top:13px;font-size:14px;color:var(--rose);
+  font-weight:700;cursor:pointer}
+.gap input{width:17px;height:17px;accent-color:var(--rose);flex:none}
+
+/* ── 排序 ─────────────────────────────── */
+.rankgrid{display:flex;flex-wrap:wrap;gap:10px}
+.rankbtn{position:relative;font:inherit;font-weight:700;font-size:16px;cursor:pointer;
+  background:var(--card);color:var(--ink);border:2.5px solid var(--line);
+  border-radius:12px;box-shadow:4px 4px 0 var(--line);padding:12px 18px}
+.rankbtn:focus-visible{outline:2.5px solid var(--rose);outline-offset:3px}
+.rankbtn.picked{background:var(--khaki);color:var(--on-accent);border-color:var(--khaki)}
+.rankbtn .n{display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:50%;background:var(--on-accent);color:var(--khaki);
+  font-size:13px;font-weight:900;margin-right:7px;font-variant-numeric:tabular-nums}
+.resetrank{margin-top:12px;background:none;border:none;font:inherit;font-size:14px;
+  color:var(--muted);text-decoration:underline;cursor:pointer;padding:4px}
+.resetrank:focus-visible{outline:2.5px solid var(--rose);outline-offset:2px;border-radius:4px}
+
+/* ── 結果 ─────────────────────────────── */
+.result{background:var(--card);border:2.5px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);padding:20px 18px;margin-top:18px}
+.tot{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.totbox{flex:1 1 140px;border:2px solid var(--hair);border-radius:12px;padding:10px 14px}
+.totbox .k{font-size:13px;color:var(--muted);font-weight:700}
+.totbox .v{font-family:var(--serif);font-size:27px;font-weight:900;font-variant-numeric:tabular-nums}
+.totbox.hi{border-color:var(--sage);background:color-mix(in srgb,var(--sage) 16%,transparent)}
+
+.tablewrap{overflow-x:auto;margin:0 -18px;padding:0 18px}
+table{border-collapse:collapse;width:100%;min-width:420px;font-size:15px}
+th,td{padding:9px 8px;text-align:center;border-bottom:1.5px solid var(--hair);
+  font-variant-numeric:tabular-nums}
+th{font-size:13px;color:var(--muted);font-weight:700;letter-spacing:.04em}
+td:first-child,th:first-child{text-align:left;font-weight:700}
+tr.top td{background:color-mix(in srgb,var(--gold) 20%,transparent)}
+.w-new{color:var(--sage);font-weight:900}
+.w-cur{color:var(--khaki);font-weight:900}
+.w-tie{color:var(--rose);font-weight:900}
+
+.verdict{margin-top:18px;padding:16px;border-radius:12px;font-size:16px;line-height:1.65;
+  border-left:5px solid var(--khaki);background:var(--bg2)}
+.verdict.good{border-left-color:var(--sage)}
+.verdict.warn{border-left-color:var(--rose)}
+.verdict b{font-weight:900}
+
+.asklist{margin-top:18px;padding:16px;border-radius:12px;background:var(--bg2);
+  border-left:5px solid var(--rose)}
+.asklist h3{margin:0 0 8px;font-size:16px;font-family:var(--serif);font-weight:700}
+.asklist ul{margin:0;padding-left:19px;font-size:15px}
+.asklist p{margin:0;font-size:15px;color:var(--muted)}
+
+/* ── CTA ──────────────────────────────── */
+.cta{margin-top:44px;background:var(--card);border:2.5px solid var(--line);
+  border-radius:16px;box-shadow:var(--shadow);padding:24px 20px;text-align:center}
+.cta h2{font-size:20px;margin-bottom:8px}
+.cta p{color:var(--muted);font-size:15px;margin:0 auto 16px;max-width:30em}
+.answer{display:inline-block;font-family:var(--serif);font-weight:900;
+  font-size:clamp(20px,5vw,26px);color:var(--rose);margin:6px 0 4px;min-height:1.3em}
+.copybtn{font:inherit;font-weight:700;font-size:15px;cursor:pointer;
+  background:var(--khaki);color:var(--on-accent);border:2.5px solid var(--line);
+  border-radius:999px;box-shadow:4px 4px 0 var(--line);padding:11px 26px;margin-top:10px}
+.copybtn:focus-visible{outline:2.5px solid var(--rose);outline-offset:3px}
+.copybtn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--line)}
+
+footer{margin-top:40px;text-align:center;color:var(--muted);font-size:13.5px}
+.saved{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(120%);
+  background:var(--line);color:var(--bg);font-size:13px;font-weight:700;
+  padding:8px 18px;border-radius:999px;transition:transform .25s;pointer-events:none;z-index:9}
+.saved.show{transform:translateX(-50%) translateY(0)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="ep">轉職系列 EP5</span>
+  <h1>現有工作 vs 新工作<br>你該換嗎？</h1>
+  <p class="sub">五個面向各打一次分數，照你最在意的排序，看真正該看的那兩列。
+     填到一半可以關掉，答案會留在這台裝置上。</p>
+</header>
+
+<!-- 步驟 1 -->
+<section>
+  <div class="stephead"><span class="stepno">1</span><h2>五個面向，各打 1 到 5 分</h2></div>
+  <p class="hint">1 分最差，5 分最好。新職那欄填不出來的，勾起來就好，那才是重點。</p>
+  <div id="dims"></div>
+</section>
+
+<!-- 步驟 2 -->
+<section>
+  <div class="stephead"><span class="stepno">2</span><h2>照你最在意的，點出順序</h2></div>
+  <p class="hint">從最在意的開始點。點錯了可以重來。</p>
+  <div class="rankgrid" id="rankgrid"></div>
+  <button class="resetrank" id="resetrank" type="button">重新排序</button>
+</section>
+
+<!-- 步驟 3 -->
+<section>
+  <div class="stephead"><span class="stepno">3</span><h2>只看前兩名，誰贏</h2></div>
+  <p class="hint">總分不太重要。真正決定的是你最在意的那兩項。</p>
+  <div class="result">
+    <div class="tot">
+      <div class="totbox"><div class="k">現職 總分</div><div class="v" id="totCur">–</div></div>
+      <div class="totbox" id="totNewBox"><div class="k">新職 總分</div><div class="v" id="totNew">–</div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>面向</th><th>現職</th><th>新職</th><th>排名</th><th>誰贏</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="verdict" id="verdict">把上面兩步填完，這裡會告訴你答案。</div>
+    <div class="asklist" id="asklist" hidden>
+      <h3>你下一次面試要問的問題</h3>
+      <div id="askbody"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <h2>你排名第一的是哪一項？</h2>
+  <p>留言告訴我，我會一則一則看。知道大家最卡的是哪一項，我才知道下一集要多講什麼。</p>
+  <div class="answer" id="ctaAnswer">先把第 2 步的順序點完</div>
+  <button class="copybtn" id="copybtn" type="button">複製我的答案</button>
+  <p style="margin-top:16px">覺得有幫到你，順手訂閱一下，最後一集會講怎麼把這些變成實際行動。</p>
+</div>
+
+<footer>ItsAI33Lab · 轉職系列 EP5</footer>
+</div>
+
+<div class="saved" id="saved">已儲存</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var DIMS = [
+    { key:"stable", name:"穩定性", ask:"你跳過去之後，那塊地會不會塌？",
+      qs:["這個產業接下來三到五年是往上還是往下？是政策在推的，還是已經在縮編？",
+          "我要進的部門，是幫公司賺錢的，還是花錢的？",
+          "這個職缺為什麼開？是新增的編制，還是有人做不下去走了？"] },
+    { key:"growth", name:"成長性", ask:"三年後，你在市場上會更值錢嗎？（帶得走的）",
+      qs:["這個職位再往上是什麼？主管每天在做的事，是我三年後想做的嗎？",
+          "這個職務的薪資天花板大概多少？去 104 查同職稱、資深一點的職缺開多少。",
+          "那個天花板，撐得起我想要的生活嗎？"] },
+    { key:"content", name:"工作內容", ask:"它難在你不怕的那個地方嗎？",
+      qs:["一整天實際在做什麼？早上進辦公室第一件事是什麼？",
+          "一週的節奏長怎樣？有沒有固定比較忙碌的時段？",
+          "這個職務最困難、最有挑戰的地方是什麼？",
+          "那種難，是我願意接受的那種嗎？"] },
+    { key:"life", name:"生活品質", ask:"下班之後，你還剩多少時間？",
+      qs:["通勤單程實際多久？一天乘二、一個月乘二十二。",
+          "加班是常態還是特例？部門的人平常幾點離開？",
+          "要不要輪班、排班？是不是週休二日？要不要出差？",
+          "工作型態：坐辦公室／跑外面／輪班／配合客戶時間？"] },
+    { key:"pay", name:"薪資報酬", ask:"這一家願意給多少、用什麼規則給？（帶不走的）",
+      qs:["除了本薪，有沒有獎金？怎麼算的？去年實際發了幾個月？",
+          "調薪是看年資還是看考績？多久一次？幅度大概多少？",
+          "對方講得出數字嗎？",
+          "講得出來＝成長預期；只說「表現好當然會有」＝話術，請用「已知的穩定」評估。"] }
+  ];
+
+  var KEY = "ep5-worksheet-v1";
+  var state = load();
+
+  function blank(){
+    var s = { cur:{}, nw:{}, gap:{}, order:[] };
+    DIMS.forEach(function(d){ s.cur[d.key]=0; s.nw[d.key]=0; s.gap[d.key]=false; });
+    return s;
+  }
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(!raw) return blank();
+      var p = JSON.parse(raw), s = blank();
+      DIMS.forEach(function(d){
+        if(typeof p.cur?.[d.key]==="number") s.cur[d.key]=p.cur[d.key];
+        if(typeof p.nw?.[d.key]==="number")  s.nw[d.key]=p.nw[d.key];
+        s.gap[d.key] = !!(p.gap && p.gap[d.key]);
+      });
+      if(Array.isArray(p.order)) s.order = p.order.filter(function(k){
+        return DIMS.some(function(d){ return d.key===k; });
+      });
+      return s;
+    }catch(e){ return blank(); }
+  }
+  var saveTimer=null, savedEl=document.getElementById("saved");
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+    savedEl.classList.add("show");
+    clearTimeout(saveTimer);
+    saveTimer=setTimeout(function(){ savedEl.classList.remove("show"); },1100);
+  }
+
+  // ── 建面向卡 ──
+  var dimsEl = document.getElementById("dims");
+  DIMS.forEach(function(d){
+    var card = document.createElement("div");
+    card.className = "dim";
+
+    var top = document.createElement("div");
+    top.className = "dimtop";
+    var nm = document.createElement("span"); nm.className="dimname"; nm.textContent=d.name;
+    var ak = document.createElement("span"); ak.className="dimask"; ak.textContent=d.ask;
+    top.appendChild(nm); top.appendChild(ak);
+    card.appendChild(top);
+
+    var det = document.createElement("details");
+    var sum = document.createElement("summary"); sum.textContent="要查、要問的問題";
+    det.appendChild(sum);
+    var ul = document.createElement("ul"); ul.className="qlist";
+    d.qs.forEach(function(q,i){
+      var li=document.createElement("li");
+      if(d.key==="pay" && i===3) li.className="note";
+      li.textContent=q; ul.appendChild(li);
+    });
+    det.appendChild(ul);
+    card.appendChild(det);
+
+    var sc = document.createElement("div"); sc.className="scores";
+    [["現職","cur"],["新職","nw"]].forEach(function(pair){
+      var lb=document.createElement("span"); lb.className="slab"; lb.textContent=pair[0];
+      var box=document.createElement("div"); box.className="dots"+(pair[1]==="nw"?" nw":"");
+      for(var n=1;n<=5;n++){
+        (function(n){
+          var b=document.createElement("button");
+          b.type="button"; b.className="dot"; b.textContent=n;
+          b.setAttribute("aria-label", d.name+" "+pair[0]+" "+n+" 分");
+          b.onclick=function(){
+            state[pair[1]][d.key] = (state[pair[1]][d.key]===n) ? 0 : n;
+            paintDots(box, state[pair[1]][d.key]);
+            save(); render();
+          };
+          box.appendChild(b);
+        })(n);
+      }
+      paintDots(box, state[pair[1]][d.key]);
+      sc.appendChild(lb); sc.appendChild(box);
+    });
+    card.appendChild(sc);
+
+    var gl=document.createElement("label"); gl.className="gap";
+    var gi=document.createElement("input"); gi.type="checkbox"; gi.checked=state.gap[d.key];
+    gi.onchange=function(){ state.gap[d.key]=gi.checked; save(); render(); };
+    gl.appendChild(gi);
+    gl.appendChild(document.createTextNode("新職這格我填不出來，面試要問"));
+    card.appendChild(gl);
+
+    dimsEl.appendChild(card);
+  });
+
+  function paintDots(box,val){
+    [].forEach.call(box.children,function(el,i){ el.classList.toggle("on", i<val); });
+  }
+
+  // ── 排序 ──
+  var rankEl = document.getElementById("rankgrid");
+  DIMS.forEach(function(d){
+    var b=document.createElement("button");
+    b.type="button"; b.className="rankbtn"; b.dataset.key=d.key;
+    b.onclick=function(){
+      var i=state.order.indexOf(d.key);
+      if(i>=0) state.order.splice(i,1); else if(state.order.length<5) state.order.push(d.key);
+      save(); render();
+    };
+    rankEl.appendChild(b);
+  });
+  document.getElementById("resetrank").onclick=function(){ state.order=[]; save(); render(); };
+
+  // ── 輸出 ──
+  var tbody=document.getElementById("tbody"),
+      verdictEl=document.getElementById("verdict"),
+      askEl=document.getElementById("asklist"),
+      askBody=document.getElementById("askbody"),
+      ctaEl=document.getElementById("ctaAnswer");
+
+  function nameOf(k){ for(var i=0;i<DIMS.length;i++) if(DIMS[i].key===k) return DIMS[i].name; return k; }
+
+  function render(){
+    // 排序按鈕
+    [].forEach.call(rankEl.children,function(b){
+      var i=state.order.indexOf(b.dataset.key);
+      b.classList.toggle("picked", i>=0);
+      b.innerHTML="";
+      if(i>=0){ var n=document.createElement("span"); n.className="n"; n.textContent=i+1; b.appendChild(n); }
+      b.appendChild(document.createTextNode(nameOf(b.dataset.key)));
+    });
+
+    // 總分
+    var tc=0,tn=0,filled=0;
+    DIMS.forEach(function(d){
+      tc+=state.cur[d.key]; tn+=state.nw[d.key];
+      if(state.cur[d.key] && state.nw[d.key]) filled++;
+    });
+    document.getElementById("totCur").textContent = tc||"–";
+    document.getElementById("totNew").textContent = tn||"–";
+    document.getElementById("totNewBox").classList.toggle("hi", tn>tc && tn>0);
+
+    // 表格
+    tbody.innerHTML="";
+    DIMS.forEach(function(d){
+      var rank=state.order.indexOf(d.key)+1;
+      var c=state.cur[d.key], n=state.nw[d.key];
+      var who="–", cls="";
+      if(c&&n){
+        if(n>c){ who="新職"; cls="w-new"; }
+        else if(c>n){ who="現職"; cls="w-cur"; }
+        else { who="平手"; cls="w-tie"; }
+      }
+      var tr=document.createElement("tr");
+      if(rank===1||rank===2) tr.className="top";
+      tr.innerHTML="<td>"+nameOf(d.key)+"</td><td>"+(c||"–")+"</td><td>"+(n||"–")+
+                   "</td><td>"+(rank||"–")+"</td><td class='"+cls+"'>"+who+"</td>";
+      tbody.appendChild(tr);
+    });
+
+    // 結論
+    var top2=state.order.slice(0,2);
+    if(filled<5 || top2.length<2){
+      verdictEl.className="verdict";
+      verdictEl.textContent = (filled<5)
+        ? "還有面向沒打完分數，先把第 1 步填完。"
+        : "把第 2 步的順序點完，這裡就會算給你看。";
+    }else{
+      var lines=[], wins=0;
+      top2.forEach(function(k,i){
+        var c=state.cur[k], n=state.nw[k];
+        var r = n>c ? "新職贏" : (c>n ? "現職贏" : "平手");
+        if(n>c) wins++;
+        lines.push("第 "+(i+1)+" 順位「"+nameOf(k)+"」：現職 "+c+"，新職 "+n+" → <b>"+r+"</b>");
+      });
+      var concl, cls;
+      if(wins===2){
+        concl="你最在意的兩項，新工作都贏。這是相對明確的訊號。";
+        cls="verdict good";
+      }else if(wins===1){
+        concl="兩項各贏一半。回去看第一集的推力：你真正想離開的原因，是哪一項？那一項沒贏，問題就還在。";
+        cls="verdict";
+      }else{
+        concl="你最在意的兩項，新工作都沒贏。就算總分比較高，你的問題也沒有被解決。";
+        cls="verdict warn";
+      }
+      verdictEl.className=cls;
+      verdictEl.innerHTML = lines.join("<br>") + "<br><br>" + concl;
+    }
+
+    // 面試要問的清單
+    var gaps=DIMS.filter(function(d){ return state.gap[d.key]; });
+    if(gaps.length){
+      askEl.hidden=false;
+      askBody.innerHTML="<ul>"+gaps.map(function(d){
+        return "<li><b>"+d.name+"</b>："+d.qs[0]+"</li>";
+      }).join("")+"</ul>";
+    }else{
+      askEl.hidden=false;
+      askBody.innerHTML="<p>目前沒有勾起來的空格。如果新職那欄你每一項都答得出來，代表你的資料夠完整了。</p>";
+    }
+
+    // CTA
+    ctaEl.textContent = state.order.length
+      ? "我排名第一的是「"+nameOf(state.order[0])+"」"
+      : "先把第 2 步的順序點完";
+  }
+
+  document.getElementById("copybtn").onclick=function(){
+    var btn=this;
+    var txt = state.order.length
+      ? "我排名第一的是「"+nameOf(state.order[0])+"」"
+      : "我還在填，等等回來留言";
+    function done(ok){
+      btn.textContent = ok ? "複製好了，去留言吧" : "長按上面那句話複製";
+      setTimeout(function(){ btn.textContent="複製我的答案"; },2200);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){done(true);},function(){done(false);});
+    } else { done(false); }
+  };
+
+  render();
+})();
+</script>
