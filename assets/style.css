@@ -147,6 +147,7 @@ h2{font-family:var(--serif);font-weight:700;font-size:22px;margin:0;letter-spaci
 .article a.btn{color:var(--on-accent)}
 .article a.btn.ghost{color:var(--ink)}
 .article a.ytcta{color:var(--on-accent)}
+.article a.subbtn{color:var(--on-accent)}
 .article a.ytlite{color:inherit}
 .article strong{font-weight:900}
 .article hr{border:0;border-top:2px dashed var(--hair);margin:38px 0}
