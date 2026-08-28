@@ -1,0 +1,484 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>行銷職涯地圖｜想轉行銷、或在行銷裡換方向，先看這張圖｜It's 33 Lab</title>
+<meta name="description" content="行銷有哪些職位、彼此怎麼轉？六條職涯路線（內容、成效、品牌、社群、電商、產品行銷）從入門到資深，每個位置列出需要的硬技能、通用能力、常見產業，以及可以從哪裡轉進來、往哪裡走。">
+<link rel="canonical" href="https://its33lab.github.io/It-s-33-lab/career-map.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="行銷職涯地圖：六條路線與它們之間的轉職路徑">
+<meta property="og:description" content="行銷不是一條路。看清楚六條路線、每個位置要什麼能力，以及你現在的位置可以橫著移到哪裡。">
+<meta property="og:url" content="https://its33lab.github.io/It-s-33-lab/career-map.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+
+<style>
+:root{
+  --l1:#a98f5f; --l2:#7d9877; --l3:#c88e73;
+  --l4:#b0879f; --l5:#7f93a8; --l6:#8d9a52;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --l1:#c8ab77; --l2:#9dba95; --l3:#dda98d;
+    --l4:#cba3bd; --l5:#9db1c7; --l6:#adbb6c;
+  }
+}
+:root[data-theme="dark"]{
+  --l1:#c8ab77; --l2:#9dba95; --l3:#dda98d;
+  --l4:#cba3bd; --l5:#9db1c7; --l6:#adbb6c;
+}
+
+.views{display:flex;gap:10px;margin:20px 0 12px}
+.viewbtn{font:inherit;font-weight:700;font-size:15px;cursor:pointer;
+  background:var(--card);color:var(--ink);border:2.5px solid var(--line);
+  border-radius:12px;box-shadow:4px 4px 0 var(--line);padding:9px 18px}
+.viewbtn.on{background:var(--khaki);color:var(--on-accent);border-color:var(--khaki)}
+.viewbtn:focus-visible{outline:2.5px solid var(--rose);outline-offset:3px}
+.viewbtn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--line)}
+
+/* ── 地圖 ───────────────────────────────── */
+.bleed{width:100vw;margin-left:calc(50% - 50vw);
+  padding:0 max(18px, calc(50vw - 620px));box-sizing:border-box}
+.mapwrap{overflow-x:auto;background:var(--card);border:2.5px solid var(--line);
+  border-radius:16px;box-shadow:var(--shadow);padding:10px}
+.mapwrap svg{display:block;width:100%;height:auto;min-width:820px;max-width:1240px;margin:0 auto}
+.rail{fill:none;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.xfer{fill:none;stroke:var(--sage);stroke-width:3;stroke-dasharray:7 6;opacity:0}
+.xfer.show{opacity:.95}
+.stn{cursor:pointer}
+.stn circle{fill:var(--card);stroke-width:4.5;transition:r .12s}
+.stn text{font-family:"Noto Sans TC",sans-serif;font-size:15px;font-weight:700;
+  fill:var(--ink);text-anchor:middle;pointer-events:none}
+.stn .lvtx{font-size:12px;font-weight:400;fill:var(--muted)}
+.stn:hover circle{r:15}
+.stn:focus-visible{outline:none}
+.stn:focus-visible circle{stroke:var(--rose);r:15}
+.stn.on circle{r:16;stroke-width:6}
+.stn.dim{opacity:.28}
+.stn.src circle{stroke:var(--sage)}
+.linename{font-family:"Noto Serif TC",serif;font-size:16px;font-weight:700;text-anchor:end}
+.stagetx{font-family:"Noto Sans TC",sans-serif;font-size:13px;font-weight:900;
+  letter-spacing:.12em;fill:var(--muted);text-anchor:middle}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 0;font-size:14px;color:var(--muted)}
+.legend b{color:var(--ink)}
+.legend .dash{display:inline-block;width:26px;border-top:3px dashed var(--sage);
+  transform:translateY(-4px);margin-right:5px}
+
+/* ── 清單檢視 ───────────────────────────── */
+.maprow{display:grid;grid-template-columns:104px repeat(3,1fr);gap:10px;margin-bottom:10px}
+.linelabel{display:flex;align-items:center;font-family:var(--serif);font-weight:700;
+  font-size:16px;line-height:1.3}
+.node{font:inherit;text-align:left;cursor:pointer;
+  background:var(--card);color:var(--ink);border:2.5px solid var(--line);
+  border-radius:14px;box-shadow:4px 4px 0 var(--line);padding:12px;
+  display:flex;flex-direction:column;gap:4px}
+.node:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--line)}
+.node:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.node .nm{font-family:var(--serif);font-weight:700;font-size:16.5px;line-height:1.35}
+.node .one{font-size:13px;color:var(--muted);line-height:1.5}
+.node.on{background:var(--khaki);color:var(--on-accent);border-color:var(--khaki)}
+.node.on .one{color:var(--on-accent);opacity:.85}
+.node.src{border-color:var(--sage);box-shadow:4px 4px 0 var(--sage)}
+.hide{display:none}
+@media (max-width:640px){
+  .maprow{grid-template-columns:1fr;gap:8px}
+  .linelabel{margin-top:10px}
+}
+
+/* ── 詳細卡 ─────────────────────────────── */
+.detail{background:var(--card);border:2.5px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);padding:20px 18px;margin-top:22px}
+.detail .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.detail h2{font-size:24px;margin:0}
+.detail .lv{font-size:12.5px;font-weight:900;letter-spacing:.1em;
+  border:2px solid currentColor;border-radius:999px;padding:2px 10px}
+.detail .desc{margin:10px 0 0;font-size:16px}
+.detail dl{margin:16px 0 0;padding-top:14px;border-top:1.5px dashed var(--hair)}
+.detail dt{font-size:12.5px;font-weight:900;letter-spacing:.1em;color:var(--khaki);margin-top:14px}
+.detail dt:first-child{margin-top:0}
+.detail dd{margin:5px 0 0;font-size:15.5px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.chip{font-size:13.5px;background:var(--bg2);border:1.5px solid var(--hair);
+  border-radius:999px;padding:4px 11px}
+.jump{font:inherit;font-size:14.5px;cursor:pointer;background:none;border:none;padding:2px 0;
+  color:var(--khaki);font-weight:700;text-decoration:underline}
+.jump:focus-visible{outline:2.5px solid var(--rose);outline-offset:2px;border-radius:4px}
+.todo{color:var(--rose);font-weight:700}
+.hintbox{margin-top:20px;padding:14px 16px;border-radius:12px;background:var(--bg2);
+  border-left:5px solid var(--rose);font-size:15px}
+.hintbox code{background:var(--bg);padding:1px 5px;border-radius:5px;font-size:14px}
+</style>
+
+<div class="wrap">
+
+<div class="sitebar">
+  <a class="brand" href="index.html">
+    <svg viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="58" r="34" fill="#a98f5f"/>
+      <path d="M50 46 C40 30 26 30 28 46" fill="#5f7a59"/>
+      <path d="M50 46 C60 28 76 30 72 48" fill="#8ea988"/>
+    </svg>
+    <span>It&rsquo;s 33 Lab</span>
+  </a>
+  <nav class="nav">
+    <a href="index.html">全部文章</a>
+    <a href="vision.html">工具</a>
+  <a class="ytcta" href="https://www.youtube.com/@its33_lab" target="_blank" rel="noopener"><svg class="yticon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.6s-.2-1.6-.9-2.3c-.9-.9-1.8-.9-2.3-1C17 4 12 4 12 4s-5 0-7.8.3c-.5.1-1.4.1-2.3 1C1.2 6 1 7.6 1 7.6S.8 9.5.8 11.4v1.3C.8 14.6 1 16.5 1 16.5s.2 1.6.9 2.3c.9.9 2 .9 2.5 1C6 20 12 20 12 20s5 0 7.8-.3c.5-.1 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.3c0-1.9-.2-3.7-.2-3.7zM9.8 15.1V8.5l6.3 3.3-6.3 3.3z"/></svg>訂閱頻道</a></nav>
+</div>
+
+<header class="page">
+  <span class="ep">工具 · 看選項</span>
+  <h1>行銷職涯地圖</h1>
+  <p class="sub"><b>想轉進行銷，或已經在行銷、想換一條線的話，先看這張圖。</b>
+     行銷不是一條路，是六條。點任何一站，看它需要什麼能力、常見在哪些產業，
+     以及可以從哪一站轉過來——那條虛線就是你的轉職路徑。</p>
+</header>
+
+<div class="views">
+  <button class="viewbtn on" type="button" data-view="map">地圖</button>
+  <button class="viewbtn" type="button" data-view="list">清單</button>
+</div>
+
+<div class="bleed" id="bleed">
+  <div class="mapwrap" id="mapwrap">
+    <svg id="svg" viewBox="0 0 1000 590" role="img" aria-label="行銷職涯地圖"></svg>
+  </div>
+</div>
+
+<div id="list" class="hide"></div>
+
+<div class="legend">
+  <span>橫向是<b>資歷</b></span>
+  <span>每一條線是一種<b>職能</b></span>
+  <span><span class="dash"></span>虛線＝<b>可以轉過來的路徑</b>（點一站才會出現）</span>
+</div>
+
+<div id="detail"></div>
+
+<div class="hintbox">
+  <b>薪資欄目前是空的。</b>這張表的數字我不會自己編——
+  等你把實際知道的區間填進 <code>salary</code> 欄位，它就會顯示。
+  沒填的會標「待補」，不會假裝有數字。
+</div>
+
+
+<style>
+.nextstep{background:var(--card);border:2.5px solid var(--line);border-radius:16px;
+  box-shadow:6px 6px 0 var(--line);padding:20px 18px;margin-top:34px}
+.nextstep .k{font-size:12.5px;font-weight:900;letter-spacing:.14em;color:var(--khaki)}
+.nextstep h3{font-family:var(--serif);font-size:21px;margin:6px 0 8px}
+.nextstep p{margin:0 0 14px;color:var(--muted);font-size:15.5px}
+.nextstep a.go{display:inline-block;font-weight:700;font-size:15px;text-decoration:none;
+  background:var(--khaki);color:var(--on-accent);border:2.5px solid var(--line);
+  border-radius:999px;box-shadow:4px 4px 0 var(--line);padding:11px 24px}
+.nextstep a.go:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--line)}
+.nextstep .all{display:block;margin-top:12px;font-size:14px;color:var(--muted)}
+</style>
+<div class="nextstep">
+  <div class="k">下一步</div>
+  <h3>看到想去的位置了，那該不該跳？</h3>
+  <p>手上已經有一個機會的話，用五個面向把現職跟新職放上同一個天平比一次，不要憑感覺決定。</p>
+  <a class="go" href="ep5.html">打開現職 vs 新職評量表 →</a>
+  <span class="all">或回到 <a href="tools.html">職涯工具箱</a>，看三個工具怎麼接在一起。</span>
+</div>
+
+<footer class="sitefoot">
+  <div class="in">
+    <div class="fcol brandcol">
+      <a class="fbrand" href="index.html"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="58" r="34" fill="#a98f5f"/><path d="M50 46 C40 30 26 30 28 46" fill="#5f7a59"/><path d="M50 46 C60 28 76 30 72 48" fill="#8ea988"/><path d="M50 52 C46 36 50 26 52 24" stroke="#5f7a59" stroke-width="5" fill="none" stroke-linecap="round"/></svg><span>It&rsquo;s 33 Lab</span></a>
+      <p class="tagline">我是珊珊。33 就是三三，我的名字。<br>
+         一個實驗室，實驗的主題是：怎麼把日子過得更像自己想要的樣子。</p>
+      <a class="ytcta" href="https://www.youtube.com/@its33_lab" target="_blank" rel="noopener"><svg class="yticon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.6s-.2-1.6-.9-2.3c-.9-.9-1.8-.9-2.3-1C17 4 12 4 12 4s-5 0-7.8.3c-.5.1-1.4.1-2.3 1C1.2 6 1 7.6 1 7.6S.8 9.5.8 11.4v1.3C.8 14.6 1 16.5 1 16.5s.2 1.6.9 2.3c.9.9 2 .9 2.5 1C6 20 12 20 12 20s5 0 7.8-.3c.5-.1 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.3c0-1.9-.2-3.7-.2-3.7zM9.8 15.1V8.5l6.3 3.3-6.3 3.3z"/></svg>訂閱頻道</a>
+    </div>
+    <div class="fcol">
+      <h4>工具</h4>
+      <ul>
+        <li><a href="tools.html">職涯工具箱</a></li>
+        <li><a href="vision.html">方向盤點</a></li>
+        <li><a href="career-map.html">行銷職涯地圖</a></li>
+        <li><a href="ep5.html">現職 vs 新職評量表</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>文章</h4>
+      <ul>
+        <li><a href="blog/ep1-push-pull.html">EP1 推力與拉力</a></li>
+        <li><a href="blog/ep2-transferable-skills.html">EP2 可移轉技能</a></li>
+        <li><a href="blog/ep3-money.html">EP3 財務評估</a></li>
+        <li><a href="blog/ep4-mental.html">EP4 心理承受力</a></li>
+        <li><a href="blog/ep5-compare.html">EP5 新舊工作比較</a></li>
+        <li><a href="blog/reverse-vision.html">番外篇 反向願景</a></li>
+        <li><a href="blog/personality-tests.html">30歲找不到方向？3 個測驗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fine">
+    <span>這個站不會蒐集你的任何資料，填寫內容只留在你自己的瀏覽器裡。</span>
+    <span class="r">&copy; 2026 It&rsquo;s 33 Lab</span>
+  </div>
+</footer>
+
+
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   行銷職涯地圖 · 資料
+   要改內容就改這裡，版面不用動。
+   salary：填字串就會顯示，例如 '月薪 3.5–4.5 萬'；留空會顯示「待補」。
+   next / from：填其他站的 id，會變成地圖上的虛線與可點的連結。
+   ══════════════════════════════════════════════════════ */
+const LINES = [
+  {name:'內容線',     cls:'l1', ids:['content-1','content-2','content-3']},
+  {name:'成效線',     cls:'l2', ids:['perf-1','perf-2','perf-3']},
+  {name:'品牌線',     cls:'l3', ids:['brand-1','brand-2','brand-3']},
+  {name:'社群線',     cls:'l4', ids:['social-1','social-2','social-3']},
+  {name:'電商線',     cls:'l5', ids:['ec-1','ec-2','ec-3']},
+  {name:'產品行銷線', cls:'l6', ids:['pmm-1','pmm-2','pmm-3']}
+];
+
+const NODES = {
+'content-1':{name:'內容行銷專員', short:'內容專員', lv:'入門', one:'負責把東西寫出來',
+  desc:'部落格文章、EDM、社群長文、產品說明。多數時間在生產內容，題目通常由上面給。',
+  hard:['SEO 基礎','關鍵字工具','CMS 操作','文案結構','基礎圖片編修'],
+  soft:['資料查證','換位思考','截稿紀律'],
+  ind:['電商','SaaS','媒體','教育','B2B 製造'],
+  salary:'', next:['content-2'], from:['social-1','brand-1']},
+'content-2':{name:'內容策略 / 內容企劃', short:'內容策略', lv:'中階', one:'決定要寫什麼、為誰寫',
+  desc:'不只寫，還要決定題目、分發渠道與衡量方式。開始為流量與轉換負責，也常常要管外包寫手。',
+  hard:['內容佈局規劃','GA4 判讀','關鍵字研究','內容日曆','外包管理'],
+  soft:['專案管理','跨部門協作','編輯判斷'],
+  ind:['SaaS','電商','媒體','顧問服務'],
+  salary:'', next:['content-3'], from:['content-1','social-2','pmm-2']},
+'content-3':{name:'內容 / 品牌內容主管', short:'內容主管', lv:'資深', one:'管團隊，也管內容跟業務目標的關係',
+  desc:'負責整體內容策略與團隊，要能把內容成效講成公司聽得懂的商業語言。',
+  hard:['年度內容策略','預算配置','成效模型','團隊管理'],
+  soft:['向上溝通','人才培育','取捨判斷'],
+  ind:['SaaS','大型電商','媒體集團'],
+  salary:'', next:[], from:['content-2','brand-3']},
+
+'perf-1':{name:'廣告投放專員', short:'廣告投放', lv:'入門', one:'實際在後台按按鈕的人',
+  desc:'Meta、Google 廣告後台操作，受眾設定、素材上線、每日數字監控。這條線最看得到數字。',
+  hard:['Meta Ads','Google Ads','受眾設定','素材測試','試算表'],
+  soft:['細心','紀律','對數字敏感'],
+  ind:['電商','代理商','遊戲','App'],
+  salary:'', next:['perf-2'], from:['ec-1','social-1']},
+'perf-2':{name:'成效行銷', short:'成效行銷', lv:'中階', one:'負責整體預算怎麼分配',
+  desc:'跨渠道分配預算、看 CPA 與 ROAS、跟內容與設計協作要素材。開始為整體獲客成本負責。',
+  hard:['跨渠道預算配置','CPA / ROAS / LTV','A/B 測試','GA4','歸因概念'],
+  soft:['談判與協作','風險控管','假設驗證'],
+  ind:['電商','SaaS','App','代理商'],
+  salary:'', next:['perf-3'], from:['perf-1','ec-2']},
+'perf-3':{name:'行銷數據分析 / 成長', short:'數據 / 成長', lv:'資深', one:'用數據決定公司要做什麼',
+  desc:'從獲客一路看到留存與回購，建模型、做歸因、找成長槓桿。是行銷裡最靠近產品與工程的位置。',
+  hard:['SQL','GA4 / BI 工具','歸因模型','實驗設計','留存與 LTV 分析'],
+  soft:['商業判斷','說服力','跨部門推動'],
+  ind:['SaaS','電商','金融科技','App'],
+  salary:'', next:[], from:['perf-2','pmm-3']},
+
+'brand-1':{name:'行銷企劃', short:'行銷企劃', lv:'入門', one:'什麼都碰一點的起點',
+  desc:'活動執行、素材發包、通路溝通、報告製作。是台灣最常見的行銷入門缺，也是轉職最容易進的一個。',
+  hard:['簡報製作','活動執行','廠商發包','基礎文案'],
+  soft:['溝通協調','抗壓','細節管理'],
+  ind:['消費品','零售','餐飲','服務業','製造業'],
+  salary:'', next:['brand-2'], from:['content-1','social-1','ec-1']},
+'brand-2':{name:'品牌行銷', short:'品牌行銷', lv:'中階', one:'管的是別人怎麼看你們',
+  desc:'品牌定位、視覺與語調維護、年度行銷節奏、跨通路整合。成效比較難用單一數字證明，這是這條線的挑戰。',
+  hard:['品牌定位','整合行銷企劃','媒體與 KOL 操作','預算管理'],
+  soft:['審美判斷','故事力','跨部門協作'],
+  ind:['消費品','美妝','餐飲','零售','精品'],
+  salary:'', next:['brand-3'], from:['brand-1','social-2','content-2']},
+'brand-3':{name:'品牌經理', short:'品牌經理', lv:'資深', one:'一個品牌的損益要由你負責',
+  desc:'負責品牌的營收、定位與資源分配，橫跨行銷、通路、產品甚至定價。',
+  hard:['損益管理','市場研究','年度策略','通路策略'],
+  soft:['決策','向上管理','團隊領導'],
+  ind:['消費品','零售','集團品牌'],
+  salary:'', next:[], from:['brand-2','pmm-3']},
+
+'social-1':{name:'社群小編', short:'社群小編', lv:'入門', one:'每天在跟受眾對話的人',
+  desc:'貼文企劃、發文排程、留言互動、簡單的圖與短影音。門檻低但耗神，是很多人行銷的第一份工作。',
+  hard:['貼文企劃','短影音剪輯','Canva / 基礎設計','排程工具'],
+  soft:['網感','即時反應','情緒穩定'],
+  ind:['餐飲','零售','電商','個人品牌','公部門'],
+  salary:'', next:['social-2'], from:[]},
+'social-2':{name:'社群經營 / 社群行銷', short:'社群行銷', lv:'中階', one:'把社群做成有目的的渠道',
+  desc:'不只發文，要規劃社群策略、經營社團或私域、跟 KOL 合作，並對互動與導流負責。',
+  hard:['社群策略','KOL 合作與評估','短影音企劃','數據判讀'],
+  soft:['議題敏感度','危機處理','關係經營'],
+  ind:['電商','餐飲','美妝','娛樂','媒體'],
+  salary:'', next:['social-3'], from:['social-1','content-1']},
+'social-3':{name:'社群 / KOL 行銷負責人', short:'社群負責人', lv:'資深', one:'管的是聲量與口碑的整體策略',
+  desc:'負責社群與網紅合作的整體布局、預算與危機處理，通常也要管跨平台的內容團隊。',
+  hard:['年度社群策略','KOL 佈局與議價','口碑監測','危機處理'],
+  soft:['判斷力','談判','團隊管理'],
+  ind:['美妝','消費品','娛樂','電商'],
+  salary:'', next:[], from:['social-2','brand-2']},
+
+'ec-1':{name:'電商營運助理', short:'電商助理', lv:'入門', one:'商品上架到出貨都碰一點',
+  desc:'商品上架、活動設定、庫存與客服協調。是最快摸到「錢怎麼進來」的入門位置。',
+  hard:['平台後台操作','商品上架','報表整理','基礎文案'],
+  soft:['細心','跨單位協調','抗壓'],
+  ind:['電商','零售','品牌自營'],
+  salary:'', next:['ec-2'], from:['brand-1']},
+'ec-2':{name:'電商營運 / 電商行銷', short:'電商營運', lv:'中階', one:'一個通路的業績由你顧',
+  desc:'負責平台或自營商城的營運：檔期規劃、定價與促銷、流量與轉換優化，同時要跟投放與內容協作。',
+  hard:['檔期與促銷規劃','轉換率優化','平台演算法','GA4','庫存與毛利概念'],
+  soft:['商業判斷','多線並行','談判'],
+  ind:['電商','零售','品牌自營','跨境'],
+  salary:'', next:['ec-3'], from:['ec-1','perf-1']},
+'ec-3':{name:'電商負責人', short:'電商負責人', lv:'資深', one:'整條線的營收與毛利',
+  desc:'負責整體電商營收、通路組合與團隊，決策範圍含定價、庫存、投放預算與人力配置。',
+  hard:['損益與毛利管理','通路策略','預算與人力配置','數據決策'],
+  soft:['決策','領導','風險承擔'],
+  ind:['電商','零售集團','品牌自營'],
+  salary:'', next:[], from:['ec-2','perf-2']},
+
+'pmm-1':{name:'產品行銷專員', short:'產品行銷專員', lv:'入門', one:'把產品講成客戶聽得懂的話',
+  desc:'產品說明、銷售素材、上市支援。需要同時聽得懂產品端與業務端在說什麼。',
+  hard:['產品文件撰寫','銷售素材製作','競品整理','簡報'],
+  soft:['理解力','跨部門溝通','邏輯表達'],
+  ind:['SaaS','B2B 科技','硬體','醫材'],
+  salary:'', next:['pmm-2'], from:['content-1','brand-1']},
+'pmm-2':{name:'產品行銷（PMM）', short:'PMM', lv:'中階', one:'產品跟市場之間的翻譯者',
+  desc:'負責市場定位、訊息架構、上市計畫與銷售賦能。要同時跟產品、業務、行銷三邊工作。',
+  hard:['市場與競品分析','訊息架構','上市（GTM）計畫','銷售賦能素材'],
+  soft:['跨部門推動','結構化思考','簡報說服'],
+  ind:['SaaS','B2B 科技','半導體周邊','醫療科技'],
+  salary:'', next:['pmm-3'], from:['pmm-1','content-2','brand-2']},
+'pmm-3':{name:'產品行銷經理', short:'產品行銷經理', lv:'資深', one:'決定產品要打誰、怎麼賣',
+  desc:'負責產品線的市場策略、定價與上市節奏，是行銷裡最靠近產品決策的位置。',
+  hard:['市場策略','定價策略','產品藍圖溝通','團隊管理'],
+  soft:['決策','跨部門領導','商業敏感度'],
+  ind:['SaaS','B2B 科技','硬體','醫療科技'],
+  salary:'', next:[], from:['pmm-2','perf-3']}
+};
+
+/* ── 座標 ── */
+const X=[300,600,890], Y0=90, DY=88, LBLX=175;
+const POS={};
+LINES.forEach((L,li)=>L.ids.forEach((id,si)=>POS[id]={x:X[si], y:Y0+li*DY, cls:L.cls}));
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const SVGNS='http://www.w3.org/2000/svg';
+let picked=null, view='map';
+
+function el(tag,attrs,txt){
+  const n=document.createElementNS(SVGNS,tag);
+  for(const k in attrs) n.setAttribute(k,attrs[k]);
+  if(txt!=null) n.textContent=txt;
+  return n;
+}
+
+function curve(a,b){
+  const p=POS[a], q=POS[b];
+  if(p.x===q.x){                       // 同一個資歷階段換線：往左邊拱出去，不要壓到其他站
+    const bow=Math.min(130, 55+Math.abs(p.y-q.y)*0.45), cx=p.x-bow;
+    return 'M'+p.x+','+p.y+' C'+cx+','+p.y+' '+cx+','+q.y+' '+q.x+','+q.y;
+  }
+  const mx=(p.x+q.x)/2;
+  return 'M'+p.x+','+p.y+' C'+mx+','+p.y+' '+mx+','+q.y+' '+q.x+','+q.y;
+}
+
+function drawMap(){
+  const svg=$('svg');
+  svg.innerHTML='';
+  ['入門','中階','資深'].forEach((t,i)=>
+    svg.appendChild(el('text',{class:'stagetx',x:X[i],y:44},t)));
+
+  // 路線
+  LINES.forEach(L=>{
+    const pts=L.ids.map(id=>POS[id].x+','+POS[id].y).join(' L');
+    svg.appendChild(el('path',{class:'rail',d:'M'+pts,style:'stroke:var(--'+L.cls+')'}));
+    svg.appendChild(el('text',{class:'linename',x:LBLX,y:POS[L.ids[0]].y+6,
+      style:'fill:var(--'+L.cls+')'},L.name));
+  });
+
+  // 轉職虛線（預設隱藏，選站才顯示）
+  const g=el('g',{id:'xfers'});
+  Object.keys(NODES).forEach(id=>(NODES[id].from||[]).forEach(src=>{
+    if(POS[src].y===POS[id].y) return;           // 同一條線的直線不用畫
+    g.appendChild(el('path',{class:'xfer','data-to':id,'data-from':src,d:curve(src,id)}));
+  }));
+  svg.appendChild(g);
+
+  // 車站
+  Object.keys(NODES).forEach(id=>{
+    const p=POS[id], n=NODES[id];
+    const grp=el('g',{class:'stn',tabindex:'0',role:'button','data-id':id,
+      'aria-label':n.name+'（'+n.lv+'）'});
+    grp.appendChild(el('circle',{cx:p.x,cy:p.y,r:13,style:'stroke:var(--'+p.cls+')'}));
+    grp.appendChild(el('text',{x:p.x,y:p.y-24},n.short));
+    grp.appendChild(el('text',{class:'lvtx',x:p.x,y:p.y+34},n.one));
+    grp.addEventListener('click',()=>pick(id));
+    grp.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(id);} });
+    svg.appendChild(grp);
+  });
+}
+
+function drawList(){
+  $('list').innerHTML = LINES.map(L=>
+    '<div class="maprow"><div class="linelabel" style="color:var(--'+L.cls+')">'+L.name+'</div>'+
+    L.ids.map(id=>{
+      const n=NODES[id];
+      return '<button class="node" type="button" data-id="'+id+'">'+
+        '<span class="nm">'+esc(n.name)+'</span>'+
+        '<span class="one">'+esc(n.lv)+'　'+esc(n.one)+'</span></button>';
+    }).join('')+'</div>').join('');
+  $('list').querySelectorAll('.node').forEach(b=>b.onclick=()=>pick(b.dataset.id));
+}
+
+function pick(id){
+  picked=id;
+  const n=NODES[id], inbound=n.from||[];
+
+  document.querySelectorAll('.stn').forEach(g=>{
+    const gid=g.dataset.id;
+    g.classList.toggle('on', gid===id);
+    g.classList.toggle('src', inbound.includes(gid));
+    g.classList.toggle('dim', gid!==id && !inbound.includes(gid) && !(n.next||[]).includes(gid));
+  });
+  document.querySelectorAll('.xfer').forEach(p=>
+    p.classList.toggle('show', p.dataset.to===id));
+  document.querySelectorAll('#list .node').forEach(b=>{
+    b.classList.toggle('on', b.dataset.id===id);
+    b.classList.toggle('src', inbound.includes(b.dataset.id));
+  });
+  renderDetail(id);
+}
+
+function chips(a){ return '<div class="chips">'+a.map(t=>'<span class="chip">'+esc(t)+'</span>').join('')+'</div>'; }
+function links(ids, empty){
+  if(!ids || !ids.length) return '<dd style="color:var(--muted)">'+empty+'</dd>';
+  return '<dd>'+ids.map(i=>'<button class="jump" type="button" data-go="'+i+'">'+esc(NODES[i].name)+'</button>')
+    .join('　·　')+'</dd>';
+}
+
+function renderDetail(id){
+  const n=NODES[id], c='var(--'+POS[id].cls+')';
+  $('detail').innerHTML =
+    '<div class="detail" style="border-color:'+c+'">'+
+      '<div class="top"><h2>'+esc(n.name)+'</h2>'+
+      '<span class="lv" style="color:'+c+'">'+esc(n.lv)+'</span></div>'+
+      '<p class="desc">'+esc(n.desc)+'</p>'+
+      '<dl>'+
+        '<dt>硬技能（沒有就過不了履歷關）</dt><dd>'+chips(n.hard)+'</dd>'+
+        '<dt>通用能力（換工作帶得走的）</dt><dd>'+chips(n.soft)+'</dd>'+
+        '<dt>常見產業</dt><dd>'+chips(n.ind)+'</dd>'+
+        '<dt>薪資區間</dt><dd>'+(n.salary?esc(n.salary):'<span class="todo">待補</span>')+'</dd>'+
+        '<dt>往上一步</dt>'+links(n.next,'這條線的最上面就是這裡了')+
+        '<dt>可以從哪裡轉進來</dt>'+links(n.from,'這是很多人行銷的第一份工作，通常從別的職能或應屆直接進來')+
+      '</dl></div>';
+  $('detail').querySelectorAll('.jump').forEach(b=>b.onclick=()=>pick(b.dataset.go));
+}
+
+document.querySelectorAll('.viewbtn').forEach(b=>b.onclick=()=>{
+  view=b.dataset.view;
+  document.querySelectorAll('.viewbtn').forEach(x=>x.classList.toggle('on',x===b));
+  $('bleed').classList.toggle('hide', view!=='map');
+  $('list').classList.toggle('hide', view!=='list');
+  if(picked) pick(picked);
+});
+
+drawMap(); drawList(); pick('brand-1');
+</script>

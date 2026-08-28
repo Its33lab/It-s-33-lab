@@ -5,8 +5,16 @@
 ## 目錄結構
 
 ```
-/index.html        工具總覽（首頁）
-/ep5/index.html    EP5 現有工作 vs 新工作 評量表
+/index.html                  首頁（文章與工具總覽）
+/tools.html                  工具箱樞紐頁：找方向 → 看選項 → 做決定
+/career-map.html             行銷職涯地圖（SVG 路線圖，資料在檔案裡的 NODES）
+/assets/style.css            共用樣式，新頁面一律 link 這支，不要各自複製色票
+/blog/*.html                 文章（EP1–EP5＋番外篇共 6 篇）
+                             版型由 scratchpad 的 build_articles.py 統一生成，
+                             改版型改那支就好，不要六個檔案各改一次
+/ep5.html                    EP5 現有工作 vs 新工作 評量表（網址已寫在影片描述，不可搬動）
+/vision.html                 反向願景產生器【人生篇專用】（規則式即時翻面，純前端、不呼叫 API）
+/sitemap.xml, /robots.txt    給搜尋引擎用
 ```
 
 **路徑一旦公開就不要再動。** 影片描述欄裡的連結是寫死的，

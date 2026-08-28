@@ -1,102 +1,325 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>It's 33 Lab · 轉職工具</title>
-<meta name="description" content="轉職系列影片用到的工具，都在這裡。免費、不用留 email。">
+<title>It's 33 Lab｜職涯 × AI × 一點人生實驗</title>
+<meta name="description" content="職涯 × AI × 一點人生實驗。給還在找方向、但想好好變好的你。這裡有免費的職涯工具與文章：找方向、盤點能力、算錢、評估心理狀態、比較新舊工作。不用留 email，填的內容只留在你的裝置。">
+<link rel="canonical" href="https://its33lab.github.io/It-s-33-lab/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="It's 33 Lab｜職涯 × AI × 一點人生實驗">
+<meta property="og:description" content="一個實驗室，實驗的主題是：怎麼把日子過得更像自己想要的樣子。">
+<meta property="og:url" content="https://its33lab.github.io/It-s-33-lab/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap">
+<link rel="stylesheet" href="assets/style.css">
 
 <style>
-:root{
-  --bg:#f7f1e6; --bg2:#efe6d5; --card:#fffaf1;
-  --ink:#4a4137; --muted:#8d8069; --line:#3a322a; --hair:#e0d4bd;
-  --khaki:#a98f5f; --rose:#c88e73; --sage:#7d9877;
-  --on-accent:#fffaf1;
-  --serif:"Noto Serif TC",Georgia,"PingFang TC","Microsoft JhengHei",serif;
-  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
-}
+:root{ --c1:#7d9877; --c2:#a98f5f; --c3:#c88e73; --c4:#7f93a8; --c5:#b0879f; --c6:#8d9a52; }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --bg:#221d18; --bg2:#1b1712; --card:#2e2721;
-    --ink:#f2ead9; --muted:#a2957f; --line:#7a6a55; --hair:#463c31;
-    --khaki:#c8ab77; --rose:#dda98d; --sage:#9dba95;
-    --on-accent:#221d18;
-  }
+    --c1:#9dba95; --c2:#c8ab77; --c3:#dda98d; --c4:#9db1c7; --c5:#cba3bd; --c6:#adbb6c; }
 }
 :root[data-theme="dark"]{
-  --bg:#221d18; --bg2:#1b1712; --card:#2e2721;
-  --ink:#f2ead9; --muted:#a2957f; --line:#7a6a55; --hair:#463c31;
-  --khaki:#c8ab77; --rose:#dda98d; --sage:#9dba95;
-  --on-accent:#221d18;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.7;
-  background-image:
-    linear-gradient(rgba(169,143,95,.10) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(169,143,95,.10) 1px,transparent 1px);
-  background-size:32px 32px;
-}
-.wrap{max-width:680px;margin:0 auto;padding:0 18px 72px}
-header{padding:56px 0 34px}
-.brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
-.brand svg{width:38px;height:38px}
-.brand span{font-weight:900;font-size:19px;letter-spacing:.01em}
-h1{font-family:var(--serif);font-weight:900;font-size:clamp(28px,6.5vw,40px);
-  line-height:1.25;margin:0 0 12px;text-wrap:balance}
-.lede{color:var(--muted);font-size:16.5px;margin:0;max-width:32em}
+  --c1:#9dba95; --c2:#c8ab77; --c3:#dda98d; --c4:#9db1c7; --c5:#cba3bd; --c6:#adbb6c; }
 
-.tool{display:block;text-decoration:none;color:inherit;
-  background:var(--card);border:2.5px solid var(--line);border-radius:16px;
-  box-shadow:6px 6px 0 var(--line);padding:22px 20px;margin-top:26px;
-  transition:transform .14s,box-shadow .14s}
-.tool:hover,.tool:focus-visible{transform:translate(-2px,-2px);box-shadow:9px 9px 0 var(--line)}
-.tool:focus-visible{outline:2.5px solid var(--rose);outline-offset:4px}
-.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.16em;color:var(--khaki)}
-.tool h2{font-family:var(--serif);font-weight:700;font-size:23px;margin:8px 0 8px}
-.tool p{margin:0;color:var(--muted);font-size:15.5px}
-.go{display:inline-block;margin-top:14px;font-weight:700;font-size:15px;color:var(--rose)}
+body{background-image:radial-gradient(var(--grid) 1.6px, transparent 1.6px);
+  background-size:22px 22px}
+
+/* ── 固定導覽列 ─────────────────────────── */
+.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(8px);border-bottom:2px solid var(--hair)}
+.topbar .in{max-width:1000px;margin:0 auto;padding:11px 20px;
+  display:flex;align-items:center;gap:16px}
+.topbar .brand{display:flex;align-items:center;gap:8px;text-decoration:none;
+  color:var(--ink);font-weight:900;font-size:16px}
+.topbar .brand svg{width:24px;height:24px}
+.topbar nav{display:flex;gap:16px;margin-left:auto;font-size:14.5px;font-weight:700}
+.topbar nav a{color:var(--muted);text-decoration:none}
+.topbar nav a:hover{color:var(--khaki)}
+.cta{display:inline-flex;align-items:center;gap:7px;background:var(--khaki);color:var(--on-accent);border:2.5px solid var(--line);
+  border-radius:12px;padding:9px 18px;font-size:14.5px;font-weight:900;text-decoration:none;
+  box-shadow:3px 3px 0 var(--line);white-space:nowrap}
+.cta:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--line)}
+@media (max-width:620px){ .topbar nav{display:none} }
+
+/* ── 分區色帶 ───────────────────────────── */
+.band{padding:64px 20px}
+.band .in{max-width:1000px;margin:0 auto}
+.band.alt{background:var(--bg2);border-top:2px solid var(--hair);border-bottom:2px solid var(--hair)}
+.band.hero{padding:78px 20px 68px;
+  background:
+    radial-gradient(900px 400px at 15% 0%, color-mix(in srgb,var(--c2) 20%,transparent), transparent 70%),
+    radial-gradient(700px 380px at 90% 30%, color-mix(in srgb,var(--c1) 18%,transparent), transparent 70%)}
+
+.kick{display:inline-block;font-size:13px;font-weight:900;letter-spacing:.16em;
+  color:var(--khaki);border:2px solid var(--khaki);border-radius:999px;padding:5px 15px}
+.hero h1{font-size:clamp(34px,6.4vw,58px);line-height:1.2;margin:20px 0 18px;max-width:15em}
+.hl{background:linear-gradient(transparent 58%, color-mix(in srgb,var(--c2) 55%,transparent) 58%)}
+.hero p{font-size:18px;max-width:34em;margin:0 0 26px;color:var(--ink)}
+.herobtns{display:flex;gap:12px;flex-wrap:wrap}
+.herobtns .btn{border-radius:12px;padding:14px 26px;font-size:16px;
+  box-shadow:5px 5px 0 var(--line)}
+.herobtns .btn:active{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--line)}
+
+.sectop{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.sectop h2{font-size:clamp(26px,4vw,34px);margin:0}
+.sectop .more{margin-left:auto;font-size:14.5px;font-weight:700;color:var(--khaki);text-decoration:none}
+.secsub{color:var(--muted);font-size:16px;margin:0 0 24px;max-width:34em}
+
+/* 主打 */
+.feature{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:center;
+  text-decoration:none;color:var(--on-accent);background:var(--c2);
+  border:2.5px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
+  padding:28px 26px;transition:transform .14s,box-shadow .14s}
+.feature:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--line)}
+.feature h3{font-family:var(--serif);font-size:clamp(24px,3.2vw,32px);margin:8px 0 10px;color:var(--on-accent)}
+.feature .k{font-size:12.5px;font-weight:900;letter-spacing:.16em;opacity:.85}
+.feature p{margin:0;font-size:16.5px;opacity:.93}
+.steps{display:flex;flex-direction:column;gap:10px}
+.steps span{background:color-mix(in srgb,var(--on-accent) 20%,transparent);
+  border-radius:12px;padding:11px 15px;font-weight:700;font-size:15.5px}
+@media (max-width:720px){ .feature{grid-template-columns:1fr} }
+
+/* 卡片格 */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card2{display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  background:color-mix(in srgb, var(--ac) 9%, var(--card));
+  border:2.5px solid var(--line);border-radius:16px;box-shadow:5px 5px 0 var(--line);
+  overflow:hidden;transition:transform .14s,box-shadow .14s}
+.card2:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--line)}
+.card2:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.card2 img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;
+  border-bottom:2.5px solid var(--line)}
+.card2 .in{padding:16px 16px 18px;display:flex;flex-direction:column;flex:1}
+.card2 .tag{align-self:flex-start;font-size:11.5px;font-weight:900;letter-spacing:.1em;
+  color:var(--on-accent);background:var(--ac);border-radius:999px;padding:3px 10px}
+.card2 h3{font-family:var(--serif);font-size:19px;margin:10px 0 7px;line-height:1.45}
+.card2 p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.65}
+.card2 .go{margin-top:auto;align-self:flex-start;font-weight:900;font-size:14px;
+  color:var(--ac);border:2px solid var(--ac);border-radius:999px;padding:7px 15px;
+  margin-top:14px;transition:background .14s,color .14s}
+.card2:hover .go{background:var(--ac);color:var(--on-accent)}
+.card2.notitle{box-shadow:var(--stack)}
+.card2.notitle:hover{transform:translate(-3px,-3px);
+  box-shadow:6px 6px 0 var(--card),6px 6px 0 2.5px var(--line),12px 12px 0 var(--card),12px 12px 0 2.5px var(--line)}
+.card2.notitle .in{padding-top:18px}
 
 .soon{margin-top:26px;border:2.5px dashed var(--hair);border-radius:16px;
-  padding:20px;color:var(--muted);font-size:15.5px}
-.soon b{color:var(--ink);font-weight:700}
-
-footer{margin-top:46px;padding-top:22px;border-top:1.5px solid var(--hair);
-  color:var(--muted);font-size:13.5px}
-footer a{color:var(--khaki)}
-@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+  padding:18px 20px;color:var(--muted);font-size:15.5px}
+.soon b{color:var(--ink)}
+.about{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:center}
+.about .ava{width:200px;height:200px;border-radius:24px;object-fit:cover;
+  border:2.5px solid var(--line);box-shadow:var(--shadow)}
+.about .k{font-size:12.5px;font-weight:900;letter-spacing:.16em;color:var(--khaki)}
+.about h2{font-size:clamp(26px,4vw,34px);margin:6px 0 12px}
+.about p{margin:0 0 12px;font-size:16.5px;max-width:36em}
+.about .btn{border-radius:12px;margin-top:6px}
+@media (max-width:640px){
+  .about{grid-template-columns:1fr;gap:20px}
+  .about .ava{width:140px;height:140px}
+}
+footer{border-top:0}
 </style>
 
-<div class="wrap">
-  <header>
-    <div class="brand">
-      <svg viewBox="24 20 54 40" aria-hidden="true">
+<div class="topbar">
+  <div class="in">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="58" r="34" fill="#a98f5f"/>
         <path d="M50 46 C40 30 26 30 28 46" fill="#5f7a59"/>
         <path d="M50 46 C60 28 76 30 72 48" fill="#8ea988"/>
         <path d="M50 52 C46 36 50 26 52 24" stroke="#5f7a59" stroke-width="5" fill="none" stroke-linecap="round"/>
       </svg>
-      <span>It's 33 Lab</span>
-    </div>
-    <h1>轉職工具</h1>
-    <p class="lede">影片裡用到的表格跟工具，都放在這裡。
-       全部免費、不用留 email，手機打開就能用。</p>
-  </header>
-
-  <a class="tool" href="ep5.html">
-    <div class="eyebrow">EP5</div>
-    <h2>現有工作 vs 新工作　評量表</h2>
-    <p>五個面向各打一次分數，照你最在意的排序，算出真正該看的那兩列。
-       填到一半可以關掉，答案會留在你的裝置上。</p>
-    <span class="go">開始填 →</span>
-  </a>
-
-  <div class="soon">
-    <b>EP6 的工具準備中。</b>最後一集會講怎麼做轉職的功課、
-    怎麼把前五集想清楚的東西變成實際行動。
+      <span>It&rsquo;s 33 Lab</span>
+    </a>
+    <nav>
+      <a href="tools.html">工具箱</a>
+      <a href="career-map.html">職涯地圖</a>
+      <a href="#articles">文章</a>
+    </nav>
+    <a class="cta" href="https://www.youtube.com/@its33_lab" target="_blank" rel="noopener"><svg class="yticon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.6s-.2-1.6-.9-2.3c-.9-.9-1.8-.9-2.3-1C17 4 12 4 12 4s-5 0-7.8.3c-.5.1-1.4.1-2.3 1C1.2 6 1 7.6 1 7.6S.8 9.5.8 11.4v1.3C.8 14.6 1 16.5 1 16.5s.2 1.6.9 2.3c.9.9 2 .9 2.5 1C6 20 12 20 12 20s5 0 7.8-.3c.5-.1 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.3c0-1.9-.2-3.7-.2-3.7zM9.8 15.1V8.5l6.3 3.3-6.3 3.3z"/></svg>訂閱頻道</a>
   </div>
-
-  <footer>
-    It's 33 Lab · 轉職系列<br>
-    這些工具不會蒐集你的任何資料，填寫內容只留在你自己的瀏覽器裡。
-  </footer>
 </div>
+
+<section class="band hero">
+  <div class="in">
+    <span class="kick">職涯 × AI × 一點人生實驗</span>
+    <h1>怎麼把日子過得<br><span class="hl">更像自己想要的樣子</span></h1>
+    <p>給還在找方向、但想好好變好的你。這裡是一個實驗室，
+       目前實驗的主題是<b>職涯</b>——動機、能力、錢、心理狀態、新舊工作的比較，一次處理一件。
+       之後還會加上 <b>AI 工具</b>跟其他人生實驗。全部免費、不用留 email，
+       你填的內容只留在自己的裝置上。</p>
+    <div class="herobtns">
+      <a class="btn" href="tools.html">打開工具箱 →</a>
+      <a class="btn ghost" href="#articles">先看文章</a>
+    </div>
+  </div>
+</section>
+
+<section class="band alt">
+  <div class="in">
+    <div class="sectop"><h2>職涯工具</h2></div>
+    <p class="secsub">職涯卡住通常卡在三個地方：不知道自己要什麼、不知道有哪些選項、不知道該不該跳。三個工具各解一個。</p>
+
+    <a class="feature" href="tools.html">
+      <div>
+        <div class="k">從這裡開始</div>
+        <h3>職涯工具箱</h3>
+        <p>三個工具對應職涯卡關的三個階段。不用全部做完，挑你現在卡住的那一個就好。</p>
+      </div>
+      <div class="steps">
+        <span>1 · 找方向　方向盤點</span>
+        <span>2 · 看選項　行銷職涯地圖</span>
+        <span>3 · 做決定　現職 vs 新職評量表</span>
+      </div>
+    </a>
+
+    <div class="grid" style="margin-top:20px">
+      <a class="card2 notitle" href="vision.html" style="--ac:var(--c1)">
+        <div class="in"><div class="metaline"><span>約 10 分鐘</span><span>5 個面向</span></div><span class="tag">找方向</span>
+          <h3>反向願景產生器</h3>
+          <p>轉職前說不出自己要什麼？先寫下你不想變成的樣子，它直接幫你翻成三年後的指標。</p>
+          <span class="go">開始寫 →</span></div>
+      </a>
+      <a class="card2 notitle" href="career-map.html" style="--ac:var(--c4)">
+        <div class="in"><div class="metaline"><span>18 個位置</span><span>6 條路線</span></div><span class="tag">看選項</span>
+          <h3>行銷職涯地圖</h3>
+          <p>六條路線、18 個位置。點任何一站就看得到要什麼能力、可以從哪裡轉過來。</p>
+          <span class="go">打開地圖 →</span></div>
+      </a>
+      <a class="card2 notitle" href="ep5.html" style="--ac:var(--c3)">
+        <div class="in"><div class="metaline"><span>約 15 分鐘</span><span>5 個面向</span></div><span class="tag">做決定</span>
+          <h3>現職 vs 新職 評量表</h3>
+          <p>五個面向各打一次分，照你最在意的排序，看真正該看的那兩列。</p>
+          <span class="go">開始填 →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="articles">
+  <div class="in">
+    <div class="sectop"><h2>文章</h2><span class="more">職涯系列與延伸主題</span></div>
+    <p class="secsub">職涯的六個階段，一集一塊：動機、能力、錢、心理狀態、新舊工作比較、找方向。可以只看文字版，也可以配著影片看。</p>
+
+    <div class="grid">
+      <a class="card2" href="blog/ep1-push-pull.html" style="--ac:var(--c2)">
+        <img src="assets/thumbs/ep1.jpg" alt="EP1 影片縮圖" loading="lazy">
+        <div class="in"><div class="metaline"><span>7 分鐘</span><span>4 個問題</span></div><span class="tag">EP1</span>
+          <h3>想轉職卻說不出原因？先分清楚推力與拉力</h3>
+          <p>把動機拆成兩種力量，你會發現討厭的反面就是你想要的。</p>
+          <span class="go">閱讀 →</span></div>
+      </a>
+      <a class="card2" href="blog/ep2-transferable-skills.html" style="--ac:var(--c6)">
+        <img src="assets/thumbs/ep2.jpg" alt="EP2 影片縮圖" loading="lazy">
+        <div class="in"><div class="metaline"><span>8 分鐘</span><span>3 個層次</span></div><span class="tag">EP2</span>
+          <h3>你會的比你想的多：可移轉技能三層盤點法</h3>
+          <p>專業技能、通用能力、軟實力分開盤，找出換工作也帶得走的那一層。</p>
+          <span class="go">閱讀 →</span></div>
+      </a>
+      <a class="card2" href="blog/ep3-money.html" style="--ac:var(--c3)">
+        <img src="assets/thumbs/ep3.jpg" alt="EP3 影片縮圖" loading="lazy">
+        <div class="in"><div class="metaline"><span>9 分鐘</span><span>3 個數字</span></div><span class="tag">EP3</span>
+          <h3>轉職前要存多少錢？三個數字算出來就知道</h3>
+          <p>固定支出、跑道長度、薪資底線。附裸辭前該準備的三件事。</p>
+          <span class="go">閱讀 →</span></div>
+      </a>
+      <a class="card2" href="blog/ep4-mental.html" style="--ac:var(--c5)">
+        <img src="assets/thumbs/ep4.jpg" alt="EP4 影片縮圖" loading="lazy">
+        <div class="in"><div class="metaline"><span>8 分鐘</span><span>4 個指標</span></div><span class="tag">EP4</span>
+          <h3>轉職撐不撐得住？四個心理指標先評估一次</h3>
+          <p>不確定感、自我懷疑、外界期待、從資深變菜鳥。適應期本來就有 90 到 180 天。</p>
+          <span class="go">閱讀 →</span></div>
+      </a>
+      <a class="card2" href="blog/ep5-compare.html" style="--ac:var(--c4)">
+        <img src="assets/thumbs/ep5.jpg" alt="EP5 影片縮圖" loading="lazy">
+        <div class="in"><div class="metaline"><span>9 分鐘</span><span>5 個面向</span></div><span class="tag">EP5</span>
+          <h3>該不該換這份工作？用五個面向比一次</h3>
+          <p>你只看得到新工作的優點，是因為資訊不對稱。用權重而不是總分做決定。</p>
+          <span class="go">閱讀 →</span></div>
+      </a>
+      <a class="card2 notitle" href="blog/personality-tests.html" style="--ac:var(--c6)">
+        <div class="in"><div class="metaline"><span>10 分鐘</span><span>3 個測驗</span></div>
+          <span class="tag">找方向</span>
+          <h3>30歲不知道人生方向？這 3 個性格測驗幫你走出職涯迷惘</h3>
+          <p>MBTI、順流致富、蓋洛普怎麼選、怎麼一起看，以及做完之後該怎麼用行動驗證。</p>
+          <span class="go">閱讀 →</span></div>
+      </a>
+      <a class="card2" href="blog/reverse-vision.html" style="--ac:var(--c1)">
+        <img src="assets/thumbs/extra.jpg" alt="番外篇 影片縮圖" loading="lazy">
+        <div class="in"><div class="metaline"><span>8 分鐘</span><span>5 個面向</span></div><span class="tag">番外篇</span>
+          <h3>不知道自己想做什麼？先寫下你不想成為的樣子</h3>
+          <p>想不出未來不是你不夠上進，是大腦在遠距離的事情上給不出畫面。換個方向問就有了。</p>
+          <span class="go">閱讀 →</span></div>
+      </a>
+    </div>
+
+    <div class="soon">
+      <b>接下來會加的：</b>職涯系列的最後一集（怎麼把想清楚的東西變成行動計畫），以及 AI 工具怎麼用在自己身上的主題。
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="about">
+  <div class="in about">
+    <img class="ava" src="assets/avatar.jpg" alt="It's 33 Lab 的盆栽頭像">
+    <div>
+      <div class="k">關於</div>
+      <h2>我是珊珊</h2>
+      <p>嗨，歡迎來到 It&rsquo;s 33 Lab。<br>
+         這裡是一個實驗室，實驗的主題是<b>「怎麼把日子過得更像自己想要的樣子」</b>。</p>
+      <p>我曾經在完全不同的職涯領域走過一圈，換過方向、也踩過不少坑——
+         但也因為這樣，我對「怎麼做選擇」這件事，累積了很多真實的觀察。</p>
+      <a class="btn" href="https://www.youtube.com/@its33_lab" target="_blank" rel="noopener">到頻道看影片 →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="sitefoot">
+  <div class="in">
+    <div class="fcol brandcol">
+      <a class="fbrand" href="index.html"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="58" r="34" fill="#a98f5f"/><path d="M50 46 C40 30 26 30 28 46" fill="#5f7a59"/><path d="M50 46 C60 28 76 30 72 48" fill="#8ea988"/><path d="M50 52 C46 36 50 26 52 24" stroke="#5f7a59" stroke-width="5" fill="none" stroke-linecap="round"/></svg><span>It&rsquo;s 33 Lab</span></a>
+      <p class="tagline">我是珊珊。33 就是三三，我的名字。<br>
+         一個實驗室，實驗的主題是：怎麼把日子過得更像自己想要的樣子。</p>
+      <a class="ytcta" href="https://www.youtube.com/@its33_lab" target="_blank" rel="noopener"><svg class="yticon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.6s-.2-1.6-.9-2.3c-.9-.9-1.8-.9-2.3-1C17 4 12 4 12 4s-5 0-7.8.3c-.5.1-1.4.1-2.3 1C1.2 6 1 7.6 1 7.6S.8 9.5.8 11.4v1.3C.8 14.6 1 16.5 1 16.5s.2 1.6.9 2.3c.9.9 2 .9 2.5 1C6 20 12 20 12 20s5 0 7.8-.3c.5-.1 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.3c0-1.9-.2-3.7-.2-3.7zM9.8 15.1V8.5l6.3 3.3-6.3 3.3z"/></svg>訂閱頻道</a>
+    </div>
+    <div class="fcol">
+      <h4>工具</h4>
+      <ul>
+        <li><a href="tools.html">職涯工具箱</a></li>
+        <li><a href="vision.html">方向盤點</a></li>
+        <li><a href="career-map.html">行銷職涯地圖</a></li>
+        <li><a href="ep5.html">現職 vs 新職評量表</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>文章</h4>
+      <ul>
+        <li><a href="blog/ep1-push-pull.html">EP1 推力與拉力</a></li>
+        <li><a href="blog/ep2-transferable-skills.html">EP2 可移轉技能</a></li>
+        <li><a href="blog/ep3-money.html">EP3 財務評估</a></li>
+        <li><a href="blog/ep4-mental.html">EP4 心理承受力</a></li>
+        <li><a href="blog/ep5-compare.html">EP5 新舊工作比較</a></li>
+        <li><a href="blog/reverse-vision.html">番外篇 反向願景</a></li>
+        <li><a href="blog/personality-tests.html">30歲找不到方向？3 個測驗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fine">
+    <span>這個站不會蒐集你的任何資料，填寫內容只留在你自己的瀏覽器裡。</span>
+    <span class="r">&copy; 2026 It&rsquo;s 33 Lab</span>
+  </div>
+</footer>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"It's 33 Lab",
+  "url":"https://its33lab.github.io/It-s-33-lab/",
+  "inLanguage":"zh-Hant-TW",
+  "description":"轉職卡住的時候，這裡有三個免費工具跟七篇文章：找方向、盤點能力、算錢、評估心理狀態、比較新舊工作。",
+  "publisher":{
+    "@type":"Person","name":"珊珊",
+    "sameAs":["https://www.youtube.com/@its33_lab"]
+  }
+}
+</script>

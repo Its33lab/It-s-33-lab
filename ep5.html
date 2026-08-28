@@ -1,8 +1,17 @@
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>轉職評量表</title>
+<meta name="description" content="現職 vs 新職評量表：穩定性、成長性、工作內容、生活品質、薪資報酬各打一次分，照你最在意的排序，看真正該看的那兩列。免費、免註冊，答案只留在你的裝置。">
+<link rel="canonical" href="https://its33lab.github.io/It-s-33-lab/ep5.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="現職 vs 新職 評量表｜別看總分，看你最在意的那兩項">
+<meta property="og:description" content="你只看得到新工作的優點，是因為資訊不對稱。用五個面向把兩邊放上同一個天平。">
+<meta property="og:url" content="https://its33lab.github.io/It-s-33-lab/ep5.html">
+<title>現職 vs 新職 評量表｜轉職前把兩邊放上同一個天平</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap">
+
+<link rel="stylesheet" href="assets/style.css">
 
 <style>
 /* ── 沿用頻道既有色票(CLAUDE.md 的設計系統),不另創一套 ───────── */
@@ -36,10 +45,8 @@
 body{
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
   line-height:1.7;-webkit-text-size-adjust:100%;
-  background-image:
-    linear-gradient(rgba(169,143,95,.10) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(169,143,95,.10) 1px,transparent 1px);
-  background-size:32px 32px;
+  background-image:radial-gradient(rgba(169,143,95,.16) 1.6px, transparent 1.6px);
+  background-size:22px 22px;
 }
 .wrap{max-width:720px;margin:0 auto;padding:0 18px 72px}
 
@@ -80,7 +87,10 @@ summary:focus-visible{outline:2.5px solid var(--rose);outline-offset:3px;border-
 
 .scores{display:grid;grid-template-columns:auto 1fr;gap:8px 12px;align-items:center;margin-top:14px}
 .slab{font-size:14px;font-weight:700;color:var(--muted);white-space:nowrap}
-.dots{display:flex;gap:6px}
+.dots{display:flex;gap:6px;align-items:center}
+.scale{display:grid;grid-template-columns:auto 1fr;gap:8px 12px;align-items:center;
+  margin-top:2px;font-size:11.5px;color:var(--muted);letter-spacing:.02em}
+.scale .hintrow{display:flex;justify-content:space-between;max-width:266px}
 .dot{flex:1;max-width:46px;aspect-ratio:1;min-height:38px;border-radius:9px;
   border:2px solid var(--hair);background:transparent;color:var(--muted);
   font:inherit;font-weight:700;font-size:15px;cursor:pointer;
@@ -158,6 +168,43 @@ footer{margin-top:40px;text-align:center;color:var(--muted);font-size:13.5px}
   padding:8px 18px;border-radius:999px;transition:transform .25s;pointer-events:none;z-index:9}
 .saved.show{transform:translateX(-50%) translateY(0)}
 
+/* 分頁：一次只看一個面向 */
+/* 資料夾式分頁 */
+.dimtabs{display:flex;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);gap:7px;overflow-x:auto;overflow-y:hidden;padding:6px 2px 0;margin:0 0 -3px}
+.dimtabs .ftab{flex:1 1 0;min-width:104px;text-align:left;cursor:pointer;font:inherit;
+  background:var(--bg2);color:var(--muted);
+  border:2.5px solid var(--line);border-bottom:none;border-top:7px solid var(--tc);
+  border-radius:13px 13px 0 0;padding:9px 12px 10px;position:relative;top:6px;
+  transition:top .12s,background .12s}
+.dimtabs .ftab .t{display:block;font-family:var(--serif);font-weight:700;font-size:16px;
+  color:var(--ink);line-height:1.3}
+.dimtabs .ftab .n{display:inline-block;margin-top:6px;font-size:11.5px;font-weight:900;color:var(--tc)}
+.dimtabs .ftab:hover{top:3px}
+.dimtabs .ftab.cur{top:0;padding-bottom:15px;color:var(--ink);
+  background:color-mix(in srgb, var(--tc) 11%, var(--card))}
+.dimtabs .ftab.cur .t{color:var(--tc)}
+.dimhead{display:flex;align-items:baseline;gap:12px;margin:0 0 4px}
+.dimhead .done{font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.dimhead .done b{color:var(--sage);font-weight:900}
+.dimtabs .toggle{display:none}
+.smalltoggle{margin-left:auto;background:none;border:none;color:var(--muted);
+  text-decoration:underline;cursor:pointer;font:inherit;font-size:12.5px;padding:2px 4px}
+.smalltoggle:hover{color:var(--khaki)}
+#dims.tabmode .dim{border-radius:0 16px 16px 16px}
+#dims.tabmode .dimtop{display:block;margin-bottom:2px}
+#dims.tabmode .dimname{font-size:22px}
+#dims.tabmode .dimask{display:block;margin-top:4px;font-size:15px}
+#dims.tabmode .dim{display:none}
+#dims.tabmode .dim.active{display:block}
+.dimnav{display:flex;align-items:center;gap:12px;margin:-2px 0 8px}
+.dimnav button{font:inherit;font-weight:700;font-size:15px;cursor:pointer;
+  background:var(--card);color:var(--ink);border:2.5px solid var(--line);
+  border-radius:12px;box-shadow:4px 4px 0 var(--line);padding:10px 17px}
+.dimnav button:disabled{opacity:.35;cursor:default;box-shadow:none}
+.dimnav button:not(:disabled):active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--line)}
+.dimnav .next{margin-left:auto;background:var(--khaki);color:var(--on-accent)}
+.dimnav .pos{color:var(--muted);font-size:13.5px;font-variant-numeric:tabular-nums}
+
 @media (prefers-reduced-motion:reduce){*{transition:none !important}}
 </style>
 
@@ -174,7 +221,16 @@ footer{margin-top:40px;text-align:center;color:var(--muted);font-size:13.5px}
 <section>
   <div class="stephead"><span class="stepno">1</span><h2>五個面向，各打 1 到 5 分</h2></div>
   <p class="hint">1 分最差，5 分最好。新職那欄填不出來的，勾起來就好，那才是重點。</p>
-  <div id="dims"></div>
+  <div class="dimhead">
+    <span class="done" id="dimdone">已完成 <b>0</b> / 5 項</span>
+  </div>
+  <div class="dimtabs" id="dimtabs"></div>
+  <div id="dims" class="tabmode"></div>
+  <div class="dimnav" id="dimnav">
+    <button id="dprev" type="button">← 上一個</button>
+    <span class="pos" id="dpos">第 1 / 5 項</span>
+    <button class="next" id="dnext" type="button">下一個 →</button>
+  </div>
 </section>
 
 <!-- 步驟 2 -->
@@ -217,7 +273,62 @@ footer{margin-top:40px;text-align:center;color:var(--muted);font-size:13.5px}
   <p style="margin-top:16px">覺得有幫到你，順手訂閱一下，最後一集會講怎麼把這些變成實際行動。</p>
 </div>
 
-<footer>ItsAI33Lab · 轉職系列 EP5</footer>
+
+<style>
+.nextstep{background:var(--card);border:2.5px solid var(--line);border-radius:16px;
+  box-shadow:6px 6px 0 var(--line);padding:20px 18px;margin-top:34px}
+.nextstep .k{font-size:12.5px;font-weight:900;letter-spacing:.14em;color:var(--khaki)}
+.nextstep h3{font-family:var(--serif);font-size:21px;margin:6px 0 8px}
+.nextstep p{margin:0 0 14px;color:var(--muted);font-size:15.5px}
+.nextstep a.go{display:inline-block;font-weight:700;font-size:15px;text-decoration:none;
+  background:var(--khaki);color:var(--on-accent);border:2.5px solid var(--line);
+  border-radius:999px;box-shadow:4px 4px 0 var(--line);padding:11px 24px}
+.nextstep a.go:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--line)}
+.nextstep .all{display:block;margin-top:12px;font-size:14px;color:var(--muted)}
+</style>
+<div class="nextstep">
+  <div class="k">下一步</div>
+  <h3>還在猶豫方向，不只是這一個機會？</h3>
+  <p>如果比完還是覺得哪裡不對，通常不是分數的問題，是方向還沒定。可以先回頭把方向盤點一次。</p>
+  <a class="go" href="vision.html">打開反向願景產生器 →</a>
+  <span class="all">或回到 <a href="tools.html">職涯工具箱</a>，看三個工具怎麼接在一起。</span>
+</div>
+
+<footer class="sitefoot">
+  <div class="in">
+    <div class="fcol brandcol">
+      <a class="fbrand" href="index.html"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="58" r="34" fill="#a98f5f"/><path d="M50 46 C40 30 26 30 28 46" fill="#5f7a59"/><path d="M50 46 C60 28 76 30 72 48" fill="#8ea988"/><path d="M50 52 C46 36 50 26 52 24" stroke="#5f7a59" stroke-width="5" fill="none" stroke-linecap="round"/></svg><span>It&rsquo;s 33 Lab</span></a>
+      <p class="tagline">我是珊珊。33 就是三三，我的名字。<br>
+         一個實驗室，實驗的主題是：怎麼把日子過得更像自己想要的樣子。</p>
+      <a class="ytcta" href="https://www.youtube.com/@its33_lab" target="_blank" rel="noopener"><svg class="yticon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.6s-.2-1.6-.9-2.3c-.9-.9-1.8-.9-2.3-1C17 4 12 4 12 4s-5 0-7.8.3c-.5.1-1.4.1-2.3 1C1.2 6 1 7.6 1 7.6S.8 9.5.8 11.4v1.3C.8 14.6 1 16.5 1 16.5s.2 1.6.9 2.3c.9.9 2 .9 2.5 1C6 20 12 20 12 20s5 0 7.8-.3c.5-.1 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.3c0-1.9-.2-3.7-.2-3.7zM9.8 15.1V8.5l6.3 3.3-6.3 3.3z"/></svg>訂閱頻道</a>
+    </div>
+    <div class="fcol">
+      <h4>工具</h4>
+      <ul>
+        <li><a href="tools.html">職涯工具箱</a></li>
+        <li><a href="vision.html">方向盤點</a></li>
+        <li><a href="career-map.html">行銷職涯地圖</a></li>
+        <li><a href="ep5.html">現職 vs 新職評量表</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>文章</h4>
+      <ul>
+        <li><a href="blog/ep1-push-pull.html">EP1 推力與拉力</a></li>
+        <li><a href="blog/ep2-transferable-skills.html">EP2 可移轉技能</a></li>
+        <li><a href="blog/ep3-money.html">EP3 財務評估</a></li>
+        <li><a href="blog/ep4-mental.html">EP4 心理承受力</a></li>
+        <li><a href="blog/ep5-compare.html">EP5 新舊工作比較</a></li>
+        <li><a href="blog/reverse-vision.html">番外篇 反向願景</a></li>
+        <li><a href="blog/personality-tests.html">30歲找不到方向？3 個測驗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fine">
+    <span>這個站不會蒐集你的任何資料，填寫內容只留在你自己的瀏覽器裡。</span>
+    <span class="r">&copy; 2026 It&rsquo;s 33 Lab</span>
+  </div>
+</footer>
 </div>
 
 <div class="saved" id="saved">已儲存</div>
@@ -308,6 +419,10 @@ footer{margin-top:40px;text-align:center;color:var(--muted);font-size:13.5px}
     });
     det.appendChild(ul);
     card.appendChild(det);
+
+    var scaleHint = document.createElement("div"); scaleHint.className="scale";
+    scaleHint.innerHTML = '<span></span><span class="hintrow"><span>← 差</span><span>好 →</span></span>';
+    card.appendChild(scaleHint);
 
     var sc = document.createElement("div"); sc.className="scores";
     [["現職","cur"],["新職","nw"]].forEach(function(pair){
@@ -467,6 +582,76 @@ footer{margin-top:40px;text-align:center;color:var(--muted);font-size:13.5px}
       navigator.clipboard.writeText(txt).then(function(){done(true);},function(){done(false);});
     } else { done(false); }
   };
+
+  /* ── 分頁：一次只看一個面向 ─────────────── */
+  var dimIdx=0, dimTab=true;
+  var dimsWrap=document.getElementById("dims");
+  var tabsEl=document.getElementById("dimtabs");
+  var navEl=document.getElementById("dimnav");
+
+  function dimCards(){ return dimsWrap.querySelectorAll(".dim"); }
+
+  function goDim(i){
+    dimIdx=Math.max(0, Math.min(DIMS.length-1, i));
+    paintDims();
+    var c=dimCards()[dimIdx];
+    if(c) c.scrollIntoView({behavior:"smooth", block:"nearest"});
+    var t=tabsEl.children[dimIdx];
+    if(t){
+      var x = t.offsetLeft - (tabsEl.clientWidth - t.offsetWidth)/2;
+      if("scrollBehavior" in document.documentElement.style && tabsEl.scrollTo)
+        tabsEl.scrollTo({left:x, behavior:"smooth"});
+      else tabsEl.scrollLeft = x;
+    }
+  }
+
+  function paintDims(){
+    var cards=dimCards();
+    for(var i=0;i<cards.length;i++) cards[i].classList.toggle("active", i===dimIdx);
+
+    var COLORS=["#7d9877","#a98f5f","#7f93a8","#b0879f","#c88e73"];
+    var html="";
+    DIMS.forEach(function(d,i){
+      var c=state.cur[d.key], n=state.nw[d.key];
+      var st = (c&&n) ? (c+" / "+n+" 分") : (c||n ? "填一半" : "還沒打分");
+      html += '<button class="ftab'+((i===dimIdx&&dimTab)?" cur":"")+'" type="button" data-i="'+i+'" '+
+        'style="--tc:'+COLORS[i%COLORS.length]+'" title="'+d.ask+'">'+
+        '<span class="t">'+d.name+'</span>'+
+        '<span class="n">'+st+'</span></button>';
+    });
+    tabsEl.style.overflowX = dimTab ? "auto" : "visible";
+    tabsEl.style.display = dimTab ? "flex" : "none";
+
+    var doneN=0;
+    DIMS.forEach(function(d){ if(state.cur[d.key] && state.nw[d.key]) doneN++; });
+    document.getElementById("dimdone").innerHTML =
+      "已完成 <b>"+doneN+"</b> / "+DIMS.length+" 項"+(doneN===DIMS.length?"　全部打完了，往下排順序 ↓":"");
+    tabsEl.innerHTML=html;
+    [].forEach.call(tabsEl.querySelectorAll("button[data-i]"),function(b){
+      b.onclick=function(){ goDim(+b.dataset.i); };
+    });
+
+
+    navEl.style.display = dimTab ? "flex" : "none";
+    if(!dimTab) return;
+    document.getElementById("dpos").textContent="第 "+(dimIdx+1)+" / "+DIMS.length+" 項";
+    var prev=document.getElementById("dprev"), next=document.getElementById("dnext");
+    prev.disabled = dimIdx===0;
+    prev.textContent = dimIdx===0 ? "← 上一個" : "← "+DIMS[dimIdx-1].name;
+    var last = dimIdx===DIMS.length-1;
+    next.textContent = last ? "去排順序 ↓" : "下一個："+DIMS[dimIdx+1].name+" →";
+  }
+
+  document.getElementById("dprev").onclick=function(){ goDim(dimIdx-1); };
+  document.getElementById("dnext").onclick=function(){
+    if(dimIdx===DIMS.length-1){
+      var r=document.getElementById("rankgrid");
+      if(r) r.scrollIntoView({behavior:"smooth", block:"center"});
+    } else goDim(dimIdx+1);
+  };
+
+  var _render = render;
+  render = function(){ _render(); paintDims(); };
 
   render();
 })();

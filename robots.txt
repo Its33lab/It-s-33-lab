@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://its33lab.github.io/It-s-33-lab/sitemap.xml
