@@ -1,0 +1,4 @@
+# 統一換行符號，避免 Windows 與 GitHub 之間出現假的差異
+* text=auto eol=lf
+*.jpg binary
+*.png binary
