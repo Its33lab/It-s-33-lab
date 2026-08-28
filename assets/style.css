@@ -220,6 +220,9 @@ footer a{color:var(--khaki)}
   box-shadow:var(--shadow);padding:22px 20px;margin:30px 0}
 .subbox h3{font-family:var(--serif);font-size:20px;margin:0 0 8px}
 .subbox p{margin:0 0 14px;color:var(--muted);font-size:15.5px;max-width:34em}
-.subbox iframe{width:100%;max-width:480px;height:150px;border:2px solid var(--hair);
-  border-radius:12px;background:var(--card);display:block}
+.subbtn{display:inline-block;font-weight:900;font-size:16px;text-decoration:none;
+  background:var(--khaki);color:var(--on-accent);border:2.5px solid var(--line);
+  border-radius:12px;box-shadow:5px 5px 0 var(--line);padding:13px 26px}
+.subbtn:active{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--line)}
+.subbox .fine{margin-top:12px}
 .subbox .fine{margin:10px 0 0;font-size:13px;color:var(--muted)}
