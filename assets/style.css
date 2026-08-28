@@ -36,6 +36,9 @@
 }
 
 *{box-sizing:border-box}
+/* 滿版區塊改用 body 寬度換算，不用 100vw（100vw 含捲軸寬度會多出幾 px） */
+html{overflow-x:clip}
+body{overflow-x:clip}
 body{
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
   line-height:1.7;-webkit-text-size-adjust:100%;
@@ -43,7 +46,7 @@ body{
   background-size:22px 22px;
 }
 img{max-width:100%;height:auto}
-.wrap{max-width:720px;margin:0 auto;padding:0 18px 72px}
+.wrap{--pad:18px;max-width:720px;margin:0 auto;padding:0 var(--pad) 72px}
 
 /* ── 站台列 ─────────────────────────────── */
 .sitebar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
@@ -176,7 +179,9 @@ blockquote p{margin:0;font-size:inherit}
 /* ── 頁尾 ───────────────────────────────── */
 .sitefoot{margin-top:64px;border-top:2.5px solid var(--line);
   background:var(--bg2);padding:40px 20px 26px;
-  width:100vw;margin-left:calc(50% - 50vw);text-align:left}   /* 不管在哪一層都能滿版 */
+  text-align:left;
+  width:calc(100% + 2 * var(--pad, 18px));
+  margin-left:calc(-1 * var(--pad, 18px))}
 .sitefoot .in{max-width:1000px;margin:0 auto;display:grid;
   grid-template-columns:1.4fr 1fr 1fr;gap:32px}
 .sitefoot .fbrand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:17px;
@@ -209,3 +214,12 @@ footer a{color:var(--khaki)}
   background:var(--bg2);border:1.5px solid var(--hair);border-radius:999px;padding:3px 10px}
 .metaline span.hi{color:var(--on-accent);background:var(--ac,var(--khaki));border-color:transparent}
 
+
+/* ── 電子報訂閱區塊 ─────────────────────── */
+.subbox{background:var(--card);border:2.5px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);padding:22px 20px;margin:30px 0}
+.subbox h3{font-family:var(--serif);font-size:20px;margin:0 0 8px}
+.subbox p{margin:0 0 14px;color:var(--muted);font-size:15.5px;max-width:34em}
+.subbox iframe{width:100%;max-width:480px;height:150px;border:2px solid var(--hair);
+  border-radius:12px;background:var(--card);display:block}
+.subbox .fine{margin:10px 0 0;font-size:13px;color:var(--muted)}
